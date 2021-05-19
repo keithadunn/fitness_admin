@@ -1,0 +1,89 @@
+<div class="row g-0 app-auth-wrapper">
+    <div class="col-12 col-md-7 col-lg-6 auth-main-col text-center p-5">
+        <div class="d-flex flex-column align-content-end">
+            <div class="app-auth-body mx-auto">	
+                <div class="app-auth-branding mb-4"><a class="app-logo" href="/"><img class="logo-icon mr-2" src="@/assets/images/app-logo.svg" alt="logo"></a></div>
+                <h2 class="auth-heading text-center mb-5">Sign Up To Fitness Tracker</h2>
+                <div class="auth-form-container text-left">
+                    <div class="auth-form login-form">
+                        <div class="first_name mb-3">
+                            <label class="sr-only" for="register-first_name">First Name</label>
+                            <input id="first_name" name="first_name" v-model="first_name" class="form-control" placeholder="First name" 
+                            :class="{ 'is-invalid': submitted && $v.first_name.$error }" />
+                            <div v-if="submitted && $v.first_name.$error" class="invalid-feedback">
+                                <span v-if="!$v.first_name.required">This field is required</span>
+                                <span v-if="!$v.first_name.minLength">Must be at least 2 characters</span>
+                                <span v-if="!$v.first_name.maxLength">Can't be more than 26 characters</span>
+                            </div>
+                        </div><!--//form-group-->
+                        <div class="last_name mb-3">
+                            <label class="sr-only" for="register-last_name">Last Name</label>
+                            <input id="last_name" name="last_name" v-model="last_name" class="form-control" placeholder="Last name" 
+                            :class="{ 'is-invalid': submitted && $v.last_name.$error }" />
+                            <div v-if="submitted && $v.last_name.$error" class="invalid-feedback">
+                                <span v-if="!$v.last_name.required">This field is required</span>
+                                <span v-if="!$v.last_name.minLength">Must be at least 2 characters</span>
+                                <span v-if="!$v.last_name.maxLength">Can't be more than 26 characters</span>
+                            </div>
+                        </div><!--//form-group-->         
+                        <div class="email mb-3">
+                            <label class="sr-only" for="register-email">Email</label>
+                            <input id="email" name="email" v-model="email" type="email" class="form-control register-email" placeholder="Email address" 
+                            :class="{ 'is-invalid': submitted && $v.email.$error }" />
+                            <div v-if="submitted && $v.email.$error" class="invalid-feedback">
+                                <span v-if="!$v.email.required">Email is required</span>
+                                <span v-if="!$v.email.email">Please provide a valid e-mail</span>
+                            </div>
+                        </div><!--//form-group-->
+                        <div class="password mb-3">
+                            <label class="sr-only" for="register-password">Password</label>
+                            <input id="password" name="password" v-model="password" type="password" class="form-control register-password" placeholder="Password" 
+                            :class="{ 'is-invalid': submitted && $v.password.$error }" />
+                            <div v-if="submitted && $v.password.$error" class="invalid-feedback">
+                                <span v-if="!$v.password.required">This field is required</span>
+                                <span v-if="!$v.password.minLength">Must be at least 6 characters</span>
+                            </div>
+                        </div><!--//form-group-->
+                        <div class="password mb-3">
+                            <label class="sr-only" for="register-password_confirmation">Password</label>
+                            <input id="password_confirmation" name="password_confirmation" v-model="password_confirmation" type="password" class="form-control register-password" placeholder="Password confirmation" 
+                            :class="{ 'is-invalid': submitted && $v.password_confirmation.$error }" />
+                            <div v-if="submitted && $v.password_confirmation.$error" class="invalid-feedback">
+                                <span v-if="!$v.password_confirmation.sameAsPassword">Password does not match</span>
+                            </div>
+                        </div><!--//form-group-->
+                        <div class="text-center">
+                            <button type="submit" @click="signUp" class="btn app-btn-primary btn-block theme-btn mx-auto">Sign Up</button>
+                        </div>
+                        
+                    </div>
+                    
+                </div><!--//auth-form-container-->	
+
+            </div><!--//auth-body-->
+        
+            <footer class="app-auth-footer">
+                <div class="container text-center py-3">
+                        <!--/* This template is free as long as you keep the footer attribution link. If you'd like to use the template without the attribution link, you can buy the commercial license via our website: themes.3rdwavemedia.com Thank you for your support. :) */-->
+                <small class="copyright">Designed with <i class="fas fa-heart" style="color: #fb866a;"></i> by <a class="app-link" href="http://themes.3rdwavemedia.com" target="_blank">Xiaoying Riley</a> for developers</small>
+                    
+                </div>
+            </footer><!--//app-auth-footer-->	
+        </div><!--//flex-column-->   
+    </div><!--//auth-main-col-->
+    <div class="col-12 col-md-5 col-lg-6 h-100 auth-background-col">
+        <div class="auth-background-holder">
+        </div>
+        <div class="auth-background-mask"></div>
+        <div class="auth-background-overlay p-3 p-lg-5">
+            <div class="d-flex flex-column align-content-end h-100">
+                <div class="h-100"></div>
+                <div class="overlay-content p-3 p-lg-4 rounded">
+                    <h5 class="mb-3 overlay-title">Explore Portal Admin Template</h5>
+                    <div>Portal is a free Bootstrap 5 admin dashboard template. You can download and view the template license <a href="https://themes.3rdwavemedia.com/bootstrap-templates/admin-dashboard/portal-free-bootstrap-admin-dashboard-template-for-developers/">here</a>.</div>
+                </div>
+            </div>
+        </div><!--//auth-background-overlay-->
+    </div><!--//auth-background-col-->
+
+</div><!--//row-->

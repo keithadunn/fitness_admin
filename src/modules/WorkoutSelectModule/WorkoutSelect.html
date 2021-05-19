@@ -1,0 +1,59 @@
+<admin-layout>
+    <div class="app-content pt-3 p-md-3 p-lg-4" v-if="workouts">
+        <div class="container-xl">
+            <div class="row g-3 mb-4 align-items-center justify-content-between">
+                <div class="col-auto">
+                    <h1 class="app-page-title mb-0"> Total # of workouts: {{ workouts.workout_count }} </h1>
+                </div>
+
+            </div><!--//row-->
+            
+            <div class="row g-4">
+                <div class="col-6 col-md-4 col-xl-3 col-xxl-2" v-for="workout in workouts.data" :key="workout.id">
+                    <div class="app-card app-card-doc shadow-sm h-100">
+                        <div class="app-card-thumb-holder p-3">
+                            <span v-if="workout.workout_type === 'Strength Training'" class="icon-holder">
+                                <i class="fas fa-dumbbell"></i>
+                            </span>
+                            <span v-else class="icon-holder">
+                                <i class="fas fa-running fa-lg"></i>
+                            </span>
+                            <router-link :to="{ name: 'set', params: {id: workout.id } }" class="app-card-link-mask"></router-link>
+                        </div>
+                        <div class="app-card-body p-3 has-card-actions">
+                            
+                            <h4 class="app-doc-title truncate mb-0 text-center">
+                                <router-link :to="{ name: 'set', params: {id: workout.id } }" class="app-card-link-mask">
+                                    <span v-for="(sets, index) in combineWorkoutType(workout.sets)" :key="sets.id">
+                                        <span v-if="index != 0"> / </span><span>{{ sets.exercises.muscle_group }}</span>
+                                    </span>
+                                </router-link>
+                            </h4>
+                            <div class="app-doc-meta">
+                                <ul class="list-unstyled mb-0 text-center">
+                                    <li><span class="text-muted">Date:</span> {{ workout.workout_date }}</li>
+                                    <li><span class="text-muted">Length:</span> {{ workout.workout_length }}</li>
+                                </ul>
+                            </div><!--//app-doc-meta-->
+                                
+                        </div><!--//app-card-body-->
+    
+                    </div><!--//app-card-->
+                </div><!--//col-->
+            </div><!--//row-->
+            <nav class="app-pagination mt-5">
+                <ul class="pagination justify-content-center">
+                    <li class="page-item disabled">
+                        <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+                    </li>
+                    <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                    <li class="page-item">
+                        <a class="page-link" href="#">Next</a>
+                    </li>
+                </ul>
+            </nav><!--//app-pagination-->
+        </div><!--//container-fluid-->
+    </div><!--//app-content-->
+</admin-layout>

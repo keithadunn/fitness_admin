@@ -1,0 +1,37 @@
+<admin-layout>
+    <div>
+        <div class="form-group">
+          <button @click="addExercise" type="button" class="btn btn-secondary">Add Exercise</button>
+        </div>
+        <h1>Post Workout</h1>
+        <input type="text" placeholder="Workout Date" v-model="workout_date">
+        <input type="text" placeholder="Workout Length" v-model="workout_length">
+        <hr class="mb-4">
+
+        <div class="row g-4 settings-section" v-for="(set_info, index) in set_infos" :key="index">
+          <div class="col-12 col-md-4">
+            <h3 class="section-title">Select Exercise</h3>
+            <div class="section-intro">
+              <select class='form-control' v-model='set_info.exercise_id'>
+                <option v-for='set_info in exercises.data' :value='set_info.id' :key='set_info.id'>{{ set_info.name }}</option>
+              </select>
+              <button @click="removeExercise(set_info)" type="button">Remove Exercise</button>
+              <button @click="addSets(index)">Add Set</button>
+            </div>
+          </div>
+          <div class="col-6 col-lg-3"  v-for="(set, index) in set_info.sets" :key="index">
+            <div class="app-card app-card-stat shadow-sm h-100">
+              <div class="app-card-body p-3 p-lg-4">
+                <input type="text" placeholder="reps" :name="`reps[${index}]`" v-model="set.reps">
+                <input type="text" placeholder="weight" :name="`weight_lifted[${index}]`" v-model="set.weight_lifted">
+                <br/><button @click="removeSet(set_info, set)">Remove Set</button>
+              </div>
+            </div>
+          </div>
+          <hr class="mb-4">
+        </div>
+      
+        <input type="button" @click="postWorkout" value="Post" />
+        <p>{{ message }}</p>
+    </div>
+</admin-layout>

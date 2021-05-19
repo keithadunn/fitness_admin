@@ -1,0 +1,128 @@
+<admin-layout>
+    <div class="container-xl">
+        <h1 class="app-page-title">TDEE Calculator</h1>
+        <hr class="mb-4">
+        <div class="app-card shadow-sm mb-4 border-left-decoration" v-if="visible">
+            <div class="inner">
+                <div class="app-card-body p-4">
+                    <div class="row gx-5 gy-3">
+                        <div class="col-lg-12 col-md-12 col-sm-12">
+                            <span>Your TDEE (total daily energy expenditure) is <h4 style="display:inline-block">{{ tdee }}</h4>.</span>
+                            <p><h5>What does this number mean?</h5></p>
+                            <p>This number represents how many calories your body needs per day to maintain your current body weight. 
+                                Keep in mind, <i>this number is not perfect</i>. This is just an estimate and should be used as a starting 
+                                off point when you start your journey to either losing weight or gaining weight. 
+                            </p>
+                            <div class="row">
+                                <div class="col-lg-6 col-md-6 col-sm-12">
+                                    <h4>Gain Weight</h4>
+                                    <table class="table">
+                                        <tbody>
+                                            <tr>
+                                            <th scope="row">Mild weight gain (0.5 lb/week)</th>
+                                            <td>{{ Math.round(tdee * 1.1) }}<small class="text-muted"> calories/day</small></td>
+                                            </tr>
+                                            <tr>
+                                            <th scope="row" >Weight gain (1 lb/week)</th>
+                                            <td>{{ Math.round(tdee * 1.2) }}<small class="text-muted"> calories/day</small></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-12">
+                                    <h4>Lose Weight</h4>
+                                    <table class="table">
+                                        <tbody>
+                                        <tr>
+                                            <th scope="row">Mild weight loss (0.5 lb/week)</th>
+                                            <td>{{ Math.round(tdee * .9) }}<small class="text-muted"> calories/day</small></td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">Weight loss (1 lb/week)</th>
+                                            <td>{{ Math.round(tdee * .8) }}<small class="text-muted"> calories/day</small></td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div><!--//col-->
+                    </div><!--//row-->
+                </div><!--//app-card-body--> 
+            </div><!--//inner-->
+        </div>
+        <div class="row g-4 settings-section">
+            <div class="col-12 col-md-4">
+                <h3 class="section-title">What is a TDEE calculator?</h3>
+                <div class="section-intro">
+                    <p>Your daily calorie requirements are based on your (TDEE ) Total Daily Energy Expenditure - in other words, how many calories you burn each day.</p>
+                    <p>TDEE is comprised of multiple types of measurements that assess the amount of energy your body uses each day. For simplicity sake, this includes your: </p>
+                    <ul>
+                        <li>Basal Metabolic Rate (BMR)</li>
+                        <li>Activity Level</li> 
+                    </ul>
+                    <p>BMR is the number of calories your body needs to thrive and function each day. It is directly related to your body weight and makes up the bulk of your daily energy needs. Your physical activity and daily movements make up a majority of the remaining calories burned.  Together, these two can account for more than 90% of your TDEE.</p>
+                </div>
+            </div>
+            <div class="col-12 col-md-8">
+                <div class="app-card app-card-settings shadow-sm p-4">
+                    
+                    <div class="app-card-body">
+                        <div class="mb-3">
+                            <label for="setting-input-2" class="form-label">Gender</label><br/>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" id="maleRadio" value="male" v-model="gender" />
+                                <label class="form-check-label">Male</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" id="femaleRadio" value="female" v-model="gender" />
+                                <label class="form-check-label">Female</label>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="setting-input-2" class="form-label">Age</label>
+                            <input type="text" class="form-control" id="setting-input-2" v-model="age" maxlength="3"
+                            :class="{ 'is-invalid': submitted && $v.age.$error }" />
+                            <div v-if="submitted && $v.age.$error" class="invalid-feedback">
+                                <span v-if="!$v.age.required">Required field</span>
+                                <span v-if="!$v.age.numeric">Numbers only</span>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="setting-input-3" class="form-label">Weight</label>
+                            <input type="text" class="form-control" id="setting-input-3" placeholder="lbs." v-model="weight" maxlength="6"
+                            :class="{ 'is-invalid': submitted && $v.weight.$error }" />
+                            <div v-if="submitted && $v.weight.$error" class="invalid-feedback">
+                                <span v-if="!$v.weight.required">Required field</span>
+                                <span v-if="!$v.weight.numeric">Numbers only</span>
+                            </div>
+                        </div>
+                        <div class="mb-3 col-md-4">
+                            <label for="setting-input-4" class="form-label">Height</label>
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="Feet" v-model="feet" maxlength="1"
+                                :class="{ 'is-invalid': submitted && $v.feet.$error }" />
+                                <span class="input-group-btn"></span>
+                                <input type="text" class="form-control" placeholder="Inches" v-model="inches" maxlength="2"
+                                :class="{ 'is-invalid': submitted && $v.inches.$error }" />
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="setting-input-5" class="form-label">Activity</label><br/>
+                            <select id="activity" name="activity" class="form-select ml-auto d-inline-flex" v-model="activity">
+                                <option value="1.2">Sedentary: little or no exercise</option>
+                                <option value="1.375">Light: exercise 1-3 times/week</option>
+                                <option value="1.465">Moderate: exercise 4-5 times/week</option>
+                                <option value="1.55">Active: daily exercise or intense exercise 3-4 times/week</option>
+                                <option value="1.725">Very Active: intense exercise 6-7 times/week</option>
+                                <option value="1.9">Extra Active: very intense exercise daily, or physical job</option>
+                            </select>
+                        </div>
+                        <button @click="calculateTdee" class="btn app-btn-primary">Calculate</button> 
+                        <button @click="reset" class="btn app-btn">Reset</button>
+                    </div><!--//app-card-body-->
+                </div><!--//app-card-->
+            </div>
+        </div>
+    </div>
+
+</admin-layout>					

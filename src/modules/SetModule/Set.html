@@ -1,0 +1,46 @@
+<admin-layout>
+  <div class="app-content pt-3 p-md-3 p-lg-4" v-if="sets">
+    <div class="container-xl">
+      <div class="row g-3 mb-4 align-items-center justify-content-between">
+        <div class="col-auto">
+          <h1 class="app-page-title mb-0">
+            <div v-if="sets.workout_data">
+              Date: <strong>{{ sets.workout_data.workout_date }}</strong> | 
+              Length: <strong>{{ sets.workout_data.workout_length }}</strong>
+            </div>
+          </h1>
+        </div>
+      </div><!--//row-->
+    
+      <div class="tab-content" id="orders-table-tab-content">
+            <div class="tab-pane fade show active" id="orders-all" role="tabpanel" aria-labelledby="orders-all-tab">
+            <div class="app-card app-card-orders-table shadow-sm mb-5">
+              <div class="app-card-body">
+                <div class="table-responsive">
+                  <table class="table app-table-hover mb-0 text-left">
+                    <thead>
+                      <tr>
+                        <th class="cell">#</th>
+                        <th class="cell">Exercise</th>
+                        <th class="cell">Reps</th>
+                        <th class="cell">Weight</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr v-for="(set, index) in sets.set_data" :key="set.id">
+                        <td>{{ index + 1  }}</td>
+                        <td>{{ set.exercises.name }}</td>
+                        <td>{{ set.reps }}</td>
+                        <td>{{ set.weight_lifted }}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div><!--//table-responsive-->
+                
+              </div><!--//app-card-body-->		
+            </div><!--//app-card-->
+          </div><!--//tab-pane-->
+      </div><!--//tab-content-->
+    </div><!--//container-fluid-->
+  </div><!--//app-content-->
+</admin-layout>
