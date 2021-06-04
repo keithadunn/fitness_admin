@@ -37,8 +37,12 @@
 					<div class="app-card-body p-3 p-lg-4">
 						<h4 class="stats-type mb-1">Total Workouts</h4>
 						<div class="stats-figure" v-if='workout_stats.workout_count'>{{ workout_stats.workout_count }}</div>
+						<div class="stats-figure" v-else>{{ workout_stats.workout_message }}</div>
 						<div class="stats-meta text" v-if='workout_stats.last_workout'>
 							Last Workout: {{ workout_stats.last_workout }}
+						</div>
+						<div class="stats-meta text" v-else>
+							Last Workout: {{ workout_stats.workout_message }}
 						</div>
 					</div>
 					<router-link to="workouts" class="app-card-link-mask"></router-link>
@@ -49,12 +53,23 @@
 				<div class="app-card app-card-stat shadow-sm h-100">
 					<div class="app-card-body p-3 p-lg-4">
 						<h4 class="stats-type mb-1">Current Weight</h4>
-						<div class="stats-figure" v-if='workout_stats.last_weight_logged'>{{ workout_stats.last_weight_logged.weight }}</div>
-						<div class="stats-meta text-success">
-							<i class="fa fa-arrow-up"></i>
+						<div v-if='workout_stats.last_weight_logged !== null'>
+							<div class="stats-figure">{{ workout_stats.last_weight_logged.weight }}</div>
+							<!-- <div class="stats-meta text-success">
+								<i class="fa fa-arrow-up"></i>
+							</div> -->
+							<div class="stats-meta text">
+								Last Weighed: {{ workout_stats.last_weight_logged.date }}
+							</div>
 						</div>
-						<div class="stats-meta text" v-if='workout_stats.last_weight_logged.date'>
-							Last Weighed: {{ workout_stats.last_weight_logged.date }}
+						<div v-else>
+							<div class="stats-figure">N/A</div>
+							<!-- <div class="stats-meta text-success">
+								<i class="fa fa-arrow-up"></i>
+							</div> -->
+							<div class="stats-meta text">
+								Last Weighed: N/A
+							</div>
 						</div>
 					</div>
 					<a class="app-card-link-mask" href="#"></a>
