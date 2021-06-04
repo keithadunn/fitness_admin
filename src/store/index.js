@@ -43,7 +43,6 @@ export default new Vuex.Store({
       commit('SET_USER', user);
       dispatch;
 
-      // set auth header
       axios.defaults.headers.common['Authorization'] = `Bearer ${access_token}`;
     },
     logout: ({ commit }) => {

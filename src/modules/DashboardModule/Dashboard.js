@@ -19,11 +19,12 @@ export default {
   },
   async created() {
     this.workout_stats = await AuthService.userStats();
+    console.log(this.workout_stats)
   },
   async mounted () {
     this.loaded = false
     try {
-      const { data } = await axios.get('http://fitness.test/api/auth/chart-weight')
+      const { data } = await axios.get('http://fitness.test/api/auth/chart-weight');
       this.chartdata = {
         labels: data.dates,
         datasets: [{

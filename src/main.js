@@ -8,7 +8,7 @@ import Vuelidate from 'vuelidate'
 Vue.config.productionTip = false;
 Vue.use(Vuelidate);
 
-// set auth header
+
 axios.defaults.headers.common['Authorization'] = `Bearer ${store.state.access_token}`;
 
 // return to login if 401 error occurs
