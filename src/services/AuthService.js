@@ -41,7 +41,7 @@ export default {
     return axios.post(url + 'store-calories/', data).then(response => response.data);
   },
   postWeight(data) {
-    return axios.post(url + 'store-weight/', data).then(response => response.data);
+    return axios.post(url + 'weight/create', data).then(response => response.data);
   },
   postWorkout(data) {
     return axios.post(url + 'store-workout/', data).then(response => response.data);

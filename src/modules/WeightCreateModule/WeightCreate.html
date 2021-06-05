@@ -1,0 +1,22 @@
+<admin-layout>
+    <div>
+        <h1>Add Weight</h1>
+        <input id="date" name="date" v-model="date" class="form-control register-password" placeholder="Date" 
+        :class="{ 'is-invalid': submitted && $v.date.$error }" />
+        <div v-if="submitted && $v.date.$error" class="invalid-feedback">
+            <span v-if="!$v.date.required">This field is required</span>
+        </div>
+
+        <input id="weight" name="weight" v-model="weight" class="form-control register-password" placeholder="Weight" 
+        :class="{ 'is-invalid': submitted && $v.weight.$error }" />
+        <div v-if="submitted && $v.weight.$error" class="invalid-feedback">
+            <span v-if="!$v.weight.required">This field is required</span>
+        </div>
+        <hr class="mb-4">
+
+      
+        <input type="button" @click="createWeightEntry" value="Post" />
+        <div v-if="error">{{ error }}</div>
+        <p v-if="message">{{ message }}</p>
+    </div>
+</admin-layout>

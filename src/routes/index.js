@@ -14,6 +14,8 @@ const strengthTrainingCreateModule = () => import('@/modules/StrengthTrainingCre
 const strengthTrainingIndexModule = () => import('@/modules/StrengthTrainingIndexModule')
 const tdeeModule = () => import('@/modules/TdeeModule')
 const userAccountModule = () => import('@/modules/UserAccountModule')
+const weightIndexModule = () => import('@/modules/WorkoutIndexModule')
+const weightCreateModule = () => import('@/modules/WeightCreateModule')
 const workoutSelectModule = () => import('@/modules/WorkoutSelectModule')
 const workoutIndexModule = () => import('@/modules/WorkoutIndexModule')
 
@@ -134,6 +136,26 @@ const router = new VueRouter({
             path: '/user-account',
             component: userAccountModule,
             name: 'user-account',
+            meta: {
+                requiresAuth: true
+            }
+        },
+
+        // Weight Create
+        {
+            path: '/weight/create',
+            component: weightCreateModule,
+            name: 'weightcreate',
+            meta: {
+                requiresAuth: true
+            }
+        },
+
+        // Weight Index
+        {
+            path: '/weight',
+            component: weightIndexModule,
+            name: 'weightindex',
             meta: {
                 requiresAuth: true
             }
